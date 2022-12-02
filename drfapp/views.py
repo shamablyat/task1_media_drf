@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 
+
 class DelExampleAPIView(DestroyAPIView):
     queryset = ExampleModel.objects.all()
     serializer_class = ExampleSerializer
@@ -37,20 +38,20 @@ class ExampleApiView(APIView):
     def put(self, request, format=None):
         url = request.query_params.get('url')
         assigned = request.query_params.get('assigned')
-        # print(assigned)
-        # print(url)
-
         if url and assigned is not None:
             post = get_object_or_404(ExampleModel, file_url=url)
-            # post = ExampleModel.objects.get(file_url=url)
-            if assigned == 'true':
-                assigned = True
-            elif assigned == 'false':
-                assigned = False
-            # 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
-            post.assigned = assigned
-            post.save()
-            serializer = ExampleSerializer(post)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            if post:
+                if assigned == 'true':
+                    assigned = True
+                    post.save()
+                elif assigned == 'false':
+                    assigned = False
+
+                post.assigned = assigned
+                post.save()
+                serializer = ExampleSerializer(post)
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response({'detail': 'Incorrect url'})
         else:
             return Response({"detail": "Object doesn't exists"}, status=status.HTTP_400_BAD_REQUEST)
+
