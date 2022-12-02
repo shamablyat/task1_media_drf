@@ -1,0 +1,15 @@
+asgiref==3.5.2
+Django==4.0.5
+django-rest-framework==0.1.0
+djangorestframework==3.13.1
+djongo==1.3.6
+dnspython==2.2.1
+eureka==0.15
+eureka-client==0.6.2
+ifaddr==0.2.0
+Pillow==9.1.1
+py-eureka-client==0.11.3
+pymongo==3.12.2
+pytz==2022.1
+sqlparse==0.2.4
+uuid==1.30
